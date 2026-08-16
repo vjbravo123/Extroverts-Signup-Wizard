@@ -1,8 +1,13 @@
 # Extroverts — Signup Wizard
 
-A responsive, high-fidelity signup wizard built as a front-end assessment project. The application recreates a modern multi-step onboarding experience with progressive disclosure, client-side state management, validation, OTP email verification, responsive UI, loading states, error handling, and a completion experience.
+A responsive, high-fidelity multi-step signup wizard built as a front-end assessment project. The application recreates a modern onboarding experience with progressive disclosure, client-side state management, form validation, OTP email verification, responsive UI, loading states, error handling, and a polished completion experience.
 
 **Developer:** Vivek Joshi
+
+### 🔗 Project Links
+
+* **Live Demo:** https://extroverts-signup-wizard-assignment.vercel.app/
+* **GitHub Repository:** https://github.com/vjbravo123/Extroverts-Signup-Wizard
 
 ---
 
@@ -26,14 +31,13 @@ A responsive, high-fidelity signup wizard built as a front-end assessment projec
 * 🧩 Reusable React components
 * 🛡️ API routes for sending and verifying OTPs
 * ⚡ Next.js App Router architecture
-* 🎨 Tailwind CSS for styling
+* 🎨 Tailwind CSS
 * 📦 TypeScript for type safety
+* 🤖 SEO metadata, robots.txt, and sitemap.xml
 
 ---
 
 ## 🧭 Signup Flow
-
-The application follows a progressive signup experience:
 
 ```text
 Terms & Conditions
@@ -91,7 +95,9 @@ src
  ┃ ┃   ┗ route.ts
  ┃ ┣ globals.css
  ┃ ┣ layout.tsx
- ┃ ┗ page.tsx
+ ┃ ┣ page.tsx
+ ┃ ┣ robots.ts
+ ┃ ┗ sitemap.ts
  ┣ components
  ┃ ┣ shared
  ┃ ┃ ┣ Header.tsx
@@ -126,13 +132,13 @@ src
 
 ### App Router
 
-The application uses the Next.js App Router.
+The application uses the Next.js App Router:
 
 ```text
 src/app
 ```
 
-The root page controls the signup experience while API route handlers are responsible for OTP operations.
+The root page controls the signup experience, while API route handlers manage OTP operations.
 
 ### API Routes
 
@@ -142,7 +148,7 @@ The root page controls the signup experience while API route handlers are respon
 POST /api/send-otp
 ```
 
-Responsible for generating/sending the OTP to the user's email address.
+Generates and sends an OTP to the user's email address.
 
 #### Verify OTP
 
@@ -150,7 +156,7 @@ Responsible for generating/sending the OTP to the user's email address.
 POST /api/verify-otp
 ```
 
-Responsible for validating the OTP submitted by the user.
+Validates the OTP submitted by the user.
 
 ---
 
@@ -164,7 +170,7 @@ The application uses the configured domain:
 vivekjoshi.online
 ```
 
-The OTP flow is:
+### OTP Flow
 
 ```text
 User enters email
@@ -188,7 +194,7 @@ Continue signup
 
 ### Environment Variables
 
-Create a `.env.local` file in the project root.
+Create a `.env.local` file in the project root:
 
 ```env
 RESEND_API_KEY=your_resend_api_key
@@ -198,10 +204,10 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 > Never commit `.env.local` or your Resend API key to Git.
 
-For production, update the site URL:
+For production:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
+NEXT_PUBLIC_SITE_URL=https://extroverts-signup-wizard-assignment.vercel.app
 ```
 
 ---
@@ -209,8 +215,6 @@ NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
 ## 🗃️ State Management
 
 Redux Toolkit is used to manage the signup wizard state.
-
-The main Redux structure is:
 
 ```text
 store/
@@ -224,7 +228,7 @@ store/
 
 ### `signupSlice.ts`
 
-Responsible for maintaining signup-related state such as:
+Maintains signup-related state such as:
 
 * Current signup step
 * User email
@@ -251,8 +255,6 @@ Provides the Redux store to the React application.
 
 ## 🔄 Progressive Disclosure
 
-The signup process intentionally reveals information progressively.
-
 Instead of presenting one large form, the user completes smaller focused steps:
 
 ```text
@@ -268,13 +270,11 @@ Step 9 → Invite Code
 Step 10 → Success
 ```
 
-This improves usability by reducing cognitive load and keeping each interaction focused.
+This reduces cognitive load and keeps each interaction focused.
 
 ---
 
 ## ✅ Validation & UX
-
-The signup experience includes validation and interaction states designed around the assessment requirements.
 
 ### Validation
 
@@ -292,9 +292,7 @@ The form handles:
 
 ### Loading States
 
-Asynchronous operations provide visual feedback so users understand that an action is being processed.
-
-Examples include:
+Asynchronous operations provide visual feedback:
 
 ```text
 Sending OTP...
@@ -302,13 +300,13 @@ Verifying OTP...
 Completing signup...
 ```
 
-Buttons are prevented from being repeatedly submitted while an operation is in progress.
+Buttons are prevented from repeated submission while an operation is in progress.
 
 ### Error Handling
 
-Errors are presented at two levels:
+Errors are presented through field-level validation and global toast notifications.
 
-**Field-level errors**
+Examples:
 
 ```text
 Invalid email address
@@ -316,30 +314,55 @@ Please enter your name
 Invalid OTP
 ```
 
-**Global feedback**
-
-Toast notifications are provided through:
+Global feedback is handled through:
 
 ```text
 ToastProvider.tsx
 ```
 
-This gives users immediate feedback for actions that affect the overall signup flow.
-
 ---
 
 ## 📱 Responsive Design
 
-The interface is designed to work across:
+The interface is designed for:
 
-* Mobile phones
-* Tablets
-* Laptops
-* Desktop screens
+* 📱 Mobile phones
+* 📲 Tablets
+* 💻 Laptops
+* 🖥️ Desktop screens
 
-The signup experience prioritizes mobile usability while maintaining a polished desktop presentation.
+Tailwind CSS is used to create responsive layouts and maintain consistent styling across viewport sizes.
 
-Tailwind CSS is used for responsive layouts and component styling.
+---
+
+## 🔎 SEO
+
+The project includes Next.js metadata configuration for:
+
+* Page title
+* Description
+* Keywords
+* Open Graph metadata
+* Twitter metadata
+* Favicon
+* Canonical URL
+* Structured data
+* Robots configuration
+* Sitemap
+
+The App Router automatically generates:
+
+```text
+/robots.txt
+/sitemap.xml
+```
+
+through:
+
+```text
+src/app/robots.ts
+src/app/sitemap.ts
+```
 
 ---
 
@@ -347,13 +370,17 @@ Tailwind CSS is used for responsive layouts and component styling.
 
 After successfully completing the signup flow, the user is taken to a dedicated success state.
 
-The success experience includes a visual confirmation and confetti animation using:
+The success experience includes:
+
+* Completion confirmation
+* Visual feedback
+* Confetti animation
+
+The confetti animation is implemented using:
 
 ```text
 canvas-confetti
 ```
-
-This provides clear feedback that the signup process has been completed successfully.
 
 ---
 
@@ -362,18 +389,16 @@ This provides clear feedback that the signup process has been completed successf
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/vjbravo123/Extroverts-Signup-Wizard.git
 ```
 
 ### 2. Navigate into the project
 
 ```bash
-cd earlley-signup
+cd Extroverts-Signup-Wizard
 ```
 
 ### 3. Install dependencies
-
-Using npm:
 
 ```bash
 npm install
@@ -457,19 +482,30 @@ Runs ESLint against the project.
 
 ---
 
-## 🏗️ Production Build
+## 🏗️ Production Deployment
 
-To test the production version locally:
+The application is deployed using Vercel.
 
-```bash
-npm run build
-npm run start
-```
+### Live Application
 
-The application will then be available at:
+**https://extroverts-signup-wizard-assignment.vercel.app/**
+
+### GitHub Repository
+
+**https://github.com/vjbravo123/Extroverts-Signup-Wizard**
+
+For a Vercel deployment, configure the following environment variables in the project settings:
 
 ```text
-http://localhost:3000
+RESEND_API_KEY
+RESEND_FROM_EMAIL
+NEXT_PUBLIC_SITE_URL
+```
+
+The production `NEXT_PUBLIC_SITE_URL` should be:
+
+```text
+https://extroverts-signup-wizard-assignment.vercel.app
 ```
 
 ---
@@ -478,7 +514,7 @@ http://localhost:3000
 
 Sensitive credentials are kept outside the source code.
 
-The following should **never** be committed:
+Never commit:
 
 ```text
 .env.local
@@ -490,13 +526,13 @@ Especially:
 RESEND_API_KEY
 ```
 
-For production deployments, environment variables should be configured through the hosting provider.
+Environment variables should be configured through the hosting provider for production deployments.
 
 ---
 
 ## 🎯 Assessment Goals
 
-This project was built with the assessment requirements in mind:
+This project was built around the assessment requirements:
 
 * High-fidelity signup experience
 * Progressive disclosure
@@ -511,7 +547,7 @@ This project was built with the assessment requirements in mind:
 * Successful completion state
 * Improved UX beyond a basic form implementation
 
-The goal was not only to reproduce the signup flow but also to make the experience feel consistent, responsive, and production-ready.
+The goal was not only to reproduce the signup flow but also to make the experience consistent, responsive, accessible, and production-ready.
 
 ---
 
